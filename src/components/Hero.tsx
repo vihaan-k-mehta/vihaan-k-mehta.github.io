@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { TopoBackground } from "./TopoBackground";
-import { TextReveal } from "./TextReveal";
+import { TextReveal } from "./ui/text-reveal";
 
 export function Hero() {
   return (
@@ -18,9 +18,13 @@ export function Hero() {
 
         <TextReveal
           as="h1"
-          text="Vihaan Mehta"
+          per="char"
+          preset="fade-in-blur"
+          speedReveal={1.8}
           className="mb-2 font-mono text-5xl font-bold tracking-tight text-balance sm:text-7xl"
-        />
+        >
+          Vihaan Mehta
+        </TextReveal>
 
         <motion.p
           initial={{ opacity: 0, y: 10 }}
