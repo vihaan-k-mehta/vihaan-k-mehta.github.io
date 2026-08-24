@@ -6,6 +6,7 @@ import { WorkGrid } from "@/components/WorkGrid";
 import { Record } from "@/components/Record";
 import { FieldLog } from "@/components/FieldLog";
 import { Footer } from "@/components/Footer";
+import { SecretInbox } from "@/components/SecretInbox";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
       <Record />
       <FieldLog />
       <Footer />
+      <SecretInbox />
     </SmoothScroll>
   );
 }
