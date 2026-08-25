@@ -20,13 +20,6 @@ const API_BASE = "https://gigabyte.tail4e5b53.ts.net";
 const API_USER = "cheeku";
 const SESSION_KEY = "sx_k";
 
-// Digit sequence that silently fires whatever draft was staged from the
-// authenticated local app. Doubles as the PIN sent to the server — a
-// separate, low-privilege secret from the real login password, since this
-// listener runs unconditionally and performs no visible UI action at all.
-// Same caveat as the Konami code: obscure once shipped, not truly secret.
-const FIRE_SEQUENCE = "918273645";
-
 type Chat = {
   id: string;
   title: string;
@@ -97,26 +90,6 @@ export function SecretInbox() {
         }
       } else {
         progress = key === KONAMI[0] ? 1 : 0;
-      }
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
-
-  // Silent fire trigger — independent of the Konami overlay above, runs
-  // unconditionally, causes no visible change on match. Sends whatever
-  // draft was staged from the authenticated local app, or no-ops.
-  useEffect(() => {
-    let buffer = "";
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key.length !== 1 || !/[0-9]/.test(e.key)) return;
-      buffer = (buffer + e.key).slice(-FIRE_SEQUENCE.length);
-      if (buffer === FIRE_SEQUENCE) {
-        buffer = "";
-        fetch(`${API_BASE}/api/draft/send`, {
-          method: "POST",
-          headers: { "X-Draft-Pin": FIRE_SEQUENCE },
-        }).catch(() => {});
       }
     }
     window.addEventListener("keydown", onKeyDown);
